@@ -7,6 +7,9 @@ values that matter. Prices, IBANs, dates, invoice numbers, legal references and
 IDs are preserved **verbatim** when the budget allows. When it doesn't, Quasar
 **tells you** instead of quietly dropping them.
 
+📖 **[Full technical documentation](DOCUMENTATION.md)** — architecture, API
+reference, the faithfulness contract, benchmarks, and limitations.
+
 ```python
 from quasar import ContextOptimizer
 
