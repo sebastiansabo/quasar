@@ -1,0 +1,35 @@
+name: Publish to TestPyPI
+
+# Manual only. Use this to rehearse a release before the real thing.
+# PyPI version numbers are PERMANENT — you cannot re-upload 0.1.0 if it's wrong.
+# Rehearse here first.
+#
+# Requires a SEPARATE trusted publisher registered at test.pypi.org
+# (same settings, but Environment name: testpypi)
+on:
+  workflow_dispatch:
+
+jobs:
+  publish-test:
+    name: Publish to TestPyPI
+    runs-on: ubuntu-latest
+    environment: testpypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
